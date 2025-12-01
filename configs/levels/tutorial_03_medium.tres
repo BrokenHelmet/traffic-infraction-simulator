@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://tutorial_03_medium"]
+
+[ext_resource type="Script" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(4.5, 8, -2),
+"rotation": Vector3(-25, 0, 0)
+}, {
+"position": Vector3(10, 12, 5),
+"rotation": Vector3(-45, 30, 0)
+}, {
+"position": Vector3(-6, 16, -10),
+"rotation": Vector3(-50, -25, 0)
+}, {
+"position": Vector3(0, 20, 0),
+"rotation": Vector3(-60, 0, 0)
+}])
+level_name = "Tutorial 3: Emergency Response"
+welcome_message = "Time for emergency vehicles! Priority management is crucial."
+difficulty = "Medium"
+level_description = "Handle regular traffic plus emergency vehicles that require immediate priority. Learn to balance emergency response with traffic flow efficiency."
+max_vehicles = 6
+vehicle_spawn_rate = 1.5
+vehicle_speed_min = 16.0
+vehicle_speed_max = 25.0
+allow_emergency_vehicles = true
+time_limit = 150.0
+target_vehicles_passed = 16
+max_collisions_allowed = 1
+max_wait_time = 18.0

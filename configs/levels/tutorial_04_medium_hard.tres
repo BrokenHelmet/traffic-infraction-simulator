@@ -1,0 +1,35 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://tutorial_04_medium_hard"]
+
+[ext_resource type="Script" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(4.5, 8, -2),
+"rotation": Vector3(-25, 0, 0)
+}, {
+"position": Vector3(12, 15, 8),
+"rotation": Vector3(-50, 35, 0)
+}, {
+"position": Vector3(-8, 18, -12),
+"rotation": Vector3(-55, -30, 0)
+}, {
+"position": Vector3(6, 25, -6),
+"rotation": Vector3(-70, 15, 0)
+}, {
+"position": Vector3(-10, 22, 10),
+"rotation": Vector3(-65, -45, 0)
+}])
+level_name = "Tutorial 4: Rush Hour"
+welcome_message = "Rush hour challenge! Heavy traffic with tight timing requirements."
+difficulty = "Medium-Hard"
+level_description = "High-density traffic simulation with faster vehicles and stricter timing. Master advanced traffic flow management under pressure."
+max_vehicles = 8
+vehicle_spawn_rate = 2.0
+vehicle_speed_min = 18.0
+vehicle_speed_max = 28.0
+allow_emergency_vehicles = true
+time_limit = 180.0
+target_vehicles_passed = 22
+max_collisions_allowed = 0
+max_wait_time = 15.0

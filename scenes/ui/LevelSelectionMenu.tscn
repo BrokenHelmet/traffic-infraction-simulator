@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://do8ci1iq7e5rh"]
+
+[ext_resource type="Script" uid="uid://5b22q10ha5d6" path="res://scripts/LevelSelectionController.gd" id="1_3k4f8"]
+[ext_resource type="FontFile" uid="uid://dd1xladvb4ugb" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="2_rd42k"]
+
+[node name="LevelSelectionMenu" type="Control"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 1024.0
+offset_right = 400.0
+offset_bottom = 1624.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3k4f8")
+debug_mode = true
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 0.95)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 32
+text = "◆ SELECT TRAFFIC CONTROL LEVEL ◆"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SubtitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 30
+text = "Choose your difficulty level and traffic scenario"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LevelButtonsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CloseButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 48
+text = "✖ CLOSE MENU"

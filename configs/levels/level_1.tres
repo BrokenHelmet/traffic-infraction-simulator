@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bf3tm7o2lwyk0"]
+
+[ext_resource type="Script" uid="uid://fhkt8vo1a8vg" path="res://scripts/LevelConfig.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://v3nxq455mh4x" path="res://scenes/levels/Level_1.tscn" id="1_tx3d3"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(4.5, 8, -2),
+"rotation": Vector3(-25, 0, 0)
+}, {
+"position": Vector3(15, 18, 12),
+"rotation": Vector3(-55, 40, 0)
+}, {
+"position": Vector3(-12, 20, -15),
+"rotation": Vector3(-60, -35, 0)
+}, {
+"position": Vector3(8, 28, -8),
+"rotation": Vector3(-75, 20, 0)
+}, {
+"position": Vector3(-15, 25, 15),
+"rotation": Vector3(-70, -50, 0)
+}, {
+"position": Vector3(0, 35, 0),
+"rotation": Vector3(-80, 0, 0)
+}])
+level_scene = ExtResource("1_tx3d3")
+level_name = "TEST_Level_1"
+difficulty = "Easy"
+level_description = "Function testing"
+welcome_message = "DEBUG: Test game functions"
+required_vehicles = 0
+required_pedestrians = 0
+target_score = 0
+score_thresholds = Array[int]([])
+time_limit = 240.0

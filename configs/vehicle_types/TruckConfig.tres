@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bk2vt5x8n7w4k"]
+
+[ext_resource type="Script" uid="uid://kdd8hs3yg12o" path="res://scripts/VehicleTypeConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+vehicle_name = "Delivery Truck"
+vehicle_category = "truck"
+is_emergency_vehicle = false
+priority_level = 1
+base_speed_min = 12.0
+base_speed_max = 20.0
+acceleration = 6.0
+braking_force = 10.0
+following_distance = 12.0
+spawn_weight = 0.7
+unlocked_at_difficulty = "easy"
+legacy_collision_box_size = Vector3(1.5, 2.0, 3.5)
+legacy_can_change_lanes = false
+legacy_stopping_distance = 12.0
+legacy_honk_probability = 0.08
+legacy_engine_sound_pitch = 0.8
+legacy_horn_sound = "truck_horn"

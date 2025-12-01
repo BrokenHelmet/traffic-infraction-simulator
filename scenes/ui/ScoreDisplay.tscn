@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://0ei5epntbvu7"]
+
+[ext_resource type="Script" uid="uid://djwpf7o8heg8j" path="res://scripts/ScoreDisplayController.gd" id="1_3k4f8"]
+[ext_resource type="FontFile" uid="uid://dd1xladvb4ugb" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="2_rd42k"]
+
+[node name="ScoreDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3k4f8")
+debug_score_ui = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -422.0
+offset_right = 183.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="VehiclesProgress" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 32
+text = "Vehicles: 0/8"
+horizontal_alignment = 1
+
+[node name="PedestriansProgress" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 32
+text = "Pedestrians: 0/5"
+horizontal_alignment = 1
+
+[node name="StarDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rd42k")
+theme_override_font_sizes/font_size = 32
+text = "☆☆☆"
+horizontal_alignment = 1
+
+[node name="EfficiencyBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+value = 50.0
+show_percentage = false

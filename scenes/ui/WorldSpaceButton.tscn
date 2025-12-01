@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://btu8nghjx82ww"]
+
+[ext_resource type="Script" uid="uid://da6nl1xkaqf0c" path="res://scripts/WorldSpaceButton.gd" id="1_rxrp6"]
+
+[node name="WorldSpaceButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rxrp6")
+debug_font_size = 32
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

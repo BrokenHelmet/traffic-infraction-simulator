@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpgjr7vh8xnqe"]
+
+[ext_resource type="Script" uid="uid://b8wvf5k1lun6v" path="res://scripts/MainController.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://c5dcpar4b81q1" path="res://scenes/ui/LandingScreen.tscn" id="2_landing"]
+[ext_resource type="PackedScene" uid="uid://b3g31x8htmrb3" path="res://scenes/SplashScreen.tscn" id="3_rarhs"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_main")
+metadata/_edit_vertical_guides_ = [540.0]
+metadata/_edit_horizontal_guides_ = [960.0]
+
+[node name="LandingScreen" parent="." instance=ExtResource("2_landing")]
+
+[node name="SplashScreen" parent="." instance=ExtResource("3_rarhs")]
+color = Color(1, 1, 1, 1)
+video_file_path = ""
+show_skip_after = 3.0
+
+[node name="VideoStreamPlayer" parent="SplashScreen" index="0"]
+custom_minimum_size = Vector2(700, 700)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="FadeOverlay" parent="SplashScreen" index="1"]
+color = Color(1, 1, 1, 1)
+
+[connection signal="start_game_requested" from="LandingScreen" to="." method="_on_landing_screen_start_game_requested"]
+
+[editable path="SplashScreen"]

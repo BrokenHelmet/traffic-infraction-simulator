@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkbfkasw0is58"]
+
+[ext_resource type="PackedScene" uid="uid://dt6i7qyfy85ne" path="res://assets/kenney_city-kit-roads/road-crossing.glb" id="1_rnxmn"]
+[ext_resource type="PackedScene" uid="uid://dxdcekj3sttp2" path="res://assets/kenney_city-kit-roads/road-straight.glb" id="2_jvxq7"]
+[ext_resource type="PackedScene" uid="uid://sc2m4gnnkbw6" path="res://scenes/intersection/OverheadTrafficLight.tscn" id="3_jvxq7"]
+
+[sub_resource type="Curve3D" id="Curve3D_jvxq7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.5, 0, 35, 0, 0, 0, 0, 0, 0, -1.5, 0, -35),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_28evr"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.5, 0, -35, 0, 0, 0, 0, 0, 0, 1.5, 0, 35),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_jvxq7"]
+vertices = PackedVector3Array(-0.275, 0.02, -3.4, -0.275, 0.02, 3.4, 0.325, 0.02, 3.4, 0.325, 0.02, -3.4)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 0
+cell_size = 0.1
+cell_height = 0.01
+agent_radius = 0.1
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_28evr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0yrs"]
+albedo_texture = SubResource("PlaceholderTexture2D_28evr")
+uv1_scale = Vector3(1, 14, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qb7jn"]
+material = SubResource("StandardMaterial3D_g0yrs")
+size = Vector2(0.75, 7)
+subdivide_width = 4
+
+[node name="TutorialLevel" type="Node3D"]
+
+[node name="road-nodes" type="Node3D" parent="."]
+
+[node name="road-straight2" parent="road-nodes" instance=ExtResource("2_jvxq7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -30)
+
+[node name="road-straight3" parent="road-nodes" instance=ExtResource("2_jvxq7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -20)
+
+[node name="road-straight4" parent="road-nodes" instance=ExtResource("2_jvxq7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -10)
+
+[node name="road-crossing2" parent="road-nodes" instance=ExtResource("1_rnxmn")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="road-straight5" parent="road-nodes" instance=ExtResource("2_jvxq7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 10)
+
+[node name="road-straight6" parent="road-nodes" instance=ExtResource("2_jvxq7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 20)
+
+[node name="road-straight7" parent="road-nodes" instance=ExtResource("2_jvxq7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 30)
+
+[node name="OverheadTrafficLight" parent="." instance=ExtResource("3_jvxq7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+
+[node name="CollisionShape3D" parent="OverheadTrafficLight/RedLightSensor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3.7, 0)
+
+[node name="Path3D_1" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+curve = SubResource("Curve3D_jvxq7")
+
+[node name="Path3D_2" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+curve = SubResource("Curve3D_28evr")
+
+[node name="VehicleCache" type="Node3D" parent="."]
+
+[node name="PedestrianPaths" type="Node3D" parent="."]
+
+[node name="PedestrianPaths_1" type="Node3D" parent="PedestrianPaths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.877849, 0, -0.833252)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="PedestrianPaths/PedestrianPaths_1"]
+navigation_mesh = SubResource("NavigationMesh_jvxq7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PedestrianPaths/PedestrianPaths_1/NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_qb7jn")
+
+[editable path="OverheadTrafficLight"]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=13 format=3 uid="uid://diow2whvir3wc"]
+
+[ext_resource type="Script" uid="uid://dsifspiyxu7wo" path="res://scripts/Main.gd" id="1_2yx70"]
+[ext_resource type="Resource" uid="uid://bf3tm7o2lwyk0" path="res://configs/levels/level_1.tres" id="2_sleug"]
+[ext_resource type="Script" uid="uid://pufa5j3dyvvg" path="res://addons/pause-manager/scripts/pause_manager.gd" id="3_arj57"]
+[ext_resource type="Script" uid="uid://t5d7vrhe53kn" path="res://scripts/GameManager.gd" id="3_sleug"]
+[ext_resource type="PackedScene" uid="uid://brj4ack3c3b5m" path="res://scenes/ui/PauseOverlay.tscn" id="4_hg886"]
+[ext_resource type="PackedScene" uid="uid://bh8xqw7r8m5vp" path="res://scenes/cameras/CameraRig.tscn" id="5_n8sbq"]
+[ext_resource type="Script" uid="uid://c6j74wd5dme4x" path="res://scripts/CameraDebugDisplay.gd" id="6_iv637"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8cew0"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_v0ihd"]
+sky_material = SubResource("ProceduralSkyMaterial_8cew0")
+
+[sub_resource type="Environment" id="Environment_jq7ux"]
+background_mode = 2
+sky = SubResource("Sky_v0ihd")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1xfj"]
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nha0i"]
+material = SubResource("StandardMaterial3D_u1xfj")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2yx70")
+level_configs = Array[Resource]([ExtResource("2_sleug")])
+version_font_size = 32
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jq7ux")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_sleug")
+
+[node name="VehicleSpawTimer" type="Timer" parent="."]
+
+[node name="GroundPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_nha0i")
+
+[node name="PauseManager" type="Node" parent="."]
+script = ExtResource("3_arj57")
+action_names = Array[StringName]([&"ui_cancel", &"pause"])
+
+[node name="UI Menu" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="PauseOverlay" parent="UI Menu" instance=ExtResource("4_hg886")]
+
+[node name="StartGameButton" type="Button" parent="UI Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "Play Tutorial"
+
+[node name="CameraRig" parent="." instance=ExtResource("5_n8sbq")]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 5, 0)
+
+[node name="CameraDebugDisplay" type="Control" parent="CameraRig"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("6_iv637")
+debug_font_size = 32
+
+[node name="CameraDebugLabel" type="Label" parent="CameraRig/CameraDebugDisplay"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -203.0
+offset_bottom = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Hello World
+
+Lorem Ipsum"

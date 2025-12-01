@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1vx385ryykfg"]
+
+[ext_resource type="PackedScene" uid="uid://ba6s8535pae3l" path="res://assets/kenney_car-kit/sedan.glb" id="1_8rmpu"]
+[ext_resource type="Script" uid="uid://sr11m75r7aj5" path="res://scripts/Vehicle.gd" id="1_pr8mv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8rmpu"]
+size = Vector3(2.60245, 2.6111, 5.13)
+
+[node name="saloon_base" type="CharacterBody3D"]
+collision_mask = 31
+script = ExtResource("1_pr8mv")
+follow_distance = 0.75
+stop_distance = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00348497, 1.2949, -0.0380242)
+shape = SubResource("BoxShape3D_8rmpu")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+target_position = Vector3(0, 0, 5)
+collision_mask = 31
+collide_with_areas = true
+
+[node name="sedan" parent="." instance=ExtResource("1_8rmpu")]
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+use_model_front = true

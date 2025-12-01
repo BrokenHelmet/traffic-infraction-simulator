@@ -1,0 +1,212 @@
+[gd_scene load_steps=10 format=3 uid="uid://bwdcd7duinwuk"]
+
+[ext_resource type="PackedScene" uid="uid://c1vx385ryykfg" path="res://scenes/vehicles/SaloonBase.tscn" id="1_vehicle"]
+[ext_resource type="PackedScene" uid="uid://bnvfebdeuncjq" path="res://scenes/pedestrians/PedestrianBase.tscn" id="2_pedestrian"]
+[ext_resource type="PackedScene" uid="uid://dxdcekj3sttp2" path="res://assets/kenney_city-kit-roads/road-straight.glb" id="3_road"]
+[ext_resource type="PackedScene" uid="uid://dt6i7qyfy85ne" path="res://assets/kenney_city-kit-roads/road-crossing.glb" id="4_crossing"]
+[ext_resource type="PackedScene" uid="uid://sc2m4gnnkbw6" path="res://scenes/intersection/OverheadTrafficLight.tscn" id="5_traffic_light"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_grid"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grid"]
+transparency = 1
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_reference"]
+size = Vector2(0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reference"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="ScaleComparisonScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 8, 6, 8)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="GridReference" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.535006)
+
+[node name="GridFloor" type="MeshInstance3D" parent="GridReference"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("QuadMesh_grid")
+surface_material_override/0 = SubResource("StandardMaterial3D_grid")
+
+[node name="ReferenceRulers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.64126)
+
+[node name="1MeterReference" type="MeshInstance3D" parent="ReferenceRulers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.01, 0)
+mesh = SubResource("QuadMesh_reference")
+surface_material_override/0 = SubResource("StandardMaterial3D_reference")
+
+[node name="Label1M" type="Label3D" parent="ReferenceRulers/1MeterReference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+text = "1 Meter
+Reference"
+
+[node name="2MeterReference" type="MeshInstance3D" parent="ReferenceRulers"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -6, 0.01, 0)
+mesh = SubResource("QuadMesh_reference")
+surface_material_override/0 = SubResource("StandardMaterial3D_reference")
+
+[node name="Label2M" type="Label3D" parent="ReferenceRulers/2MeterReference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+text = "2 Meter
+Reference"
+
+[node name="5MeterReference" type="MeshInstance3D" parent="ReferenceRulers"]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -4, 0.01, 0)
+mesh = SubResource("QuadMesh_reference")
+surface_material_override/0 = SubResource("StandardMaterial3D_reference")
+
+[node name="Label5M" type="Label3D" parent="ReferenceRulers/5MeterReference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2, 0)
+text = "5 Meter
+Reference
+(Traffic Light)"
+
+[node name="CurrentAssets" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.64126)
+
+[node name="Vehicle_Current" parent="CurrentAssets" instance=ExtResource("1_vehicle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="VehicleLabel" type="Label3D" parent="CurrentAssets/Vehicle_Current"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "Vehicle
+(Current Scale)"
+font_size = 28
+outline_size = 2
+
+[node name="Pedestrian_Current" parent="CurrentAssets" instance=ExtResource("2_pedestrian")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="PedestrianLabel" type="Label3D" parent="CurrentAssets/Pedestrian_Current"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+text = "Pedestrian
+(Current Scale)"
+font_size = 28
+outline_size = 2
+
+[node name="Road_Current" parent="CurrentAssets" instance=ExtResource("3_road")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="RoadLabel" type="Label3D" parent="CurrentAssets/Road_Current"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+text = "Road Segment
+(Current Scale)"
+font_size = 28
+outline_size = 2
+
+[node name="Crossing_Current" parent="CurrentAssets" instance=ExtResource("4_crossing")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="CrossingLabel" type="Label3D" parent="CurrentAssets/Crossing_Current"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+text = "Road Crossing
+(Current Scale)"
+font_size = 28
+outline_size = 2
+
+[node name="TrafficLight_Current" parent="CurrentAssets" instance=ExtResource("5_traffic_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="TrafficLightLabel" type="Label3D" parent="CurrentAssets/TrafficLight_Current"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 1)
+text = "Traffic Light
+(Current Scale)"
+font_size = 28
+outline_size = 2
+
+[node name="TargetScales" type="Node3D" parent="."]
+
+[node name="Pedestrian_Target" parent="TargetScales" instance=ExtResource("2_pedestrian")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05675, 4.76837e-07, -14.023)
+
+[node name="PedestrianLabel" type="Label3D" parent="TargetScales/Pedestrian_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+text = "Pedestrian
+(Target: 1.7m H)"
+font_size = 28
+outline_size = 2
+
+[node name="Pedestrian_Target2" parent="TargetScales" instance=ExtResource("2_pedestrian")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.30351, 4.76837e-07, -15.5891)
+
+[node name="PedestrianLabel" type="Label3D" parent="TargetScales/Pedestrian_Target2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+text = "Pedestrian
+(Target: 1.7m H)"
+font_size = 28
+outline_size = 2
+
+[node name="Vehicle_Target" parent="TargetScales" instance=ExtResource("1_vehicle")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.5, 0, -9.89634)
+
+[node name="VehicleLabel" type="Label3D" parent="TargetScales/Vehicle_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "Vehicle
+(Target: 4.5m L)"
+font_size = 28
+outline_size = 2
+
+[node name="Road_Target" parent="TargetScales" instance=ExtResource("3_road")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0, -5)
+
+[node name="RoadLabel" type="Label3D" parent="TargetScales/Road_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+text = "Road Segment
+(Target: 3.5m W)"
+font_size = 28
+outline_size = 2
+
+[node name="Crossing_Target" parent="TargetScales" instance=ExtResource("4_crossing")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.02697, 0, -15)
+
+[node name="CrossingLabel" type="Label3D" parent="TargetScales/Crossing_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+text = "Road Crossing
+(Target: 3m W)"
+font_size = 28
+outline_size = 2
+
+[node name="TrafficLight_Target" parent="TargetScales" instance=ExtResource("5_traffic_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6906, -1.19209e-07, -14.6915)
+
+[node name="TrafficLightLabel" type="Label3D" parent="TargetScales/TrafficLight_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 1)
+text = "Traffic Light
+(Target: 5m H)"
+font_size = 28
+outline_size = 2
+
+[node name="Instructions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -6)
+
+[node name="InstructionLabel" type="Label3D" parent="Instructions"]
+text = "SCALE COMPARISON SCENE
+================
+
+RED BARS: Height references (1m, 2m, 5m)
+CURRENT ROW (Z=2): Assets with current scales
+TARGET ROW (Z=-4): Assets with target scales
+
+EXPECTED PROPORTIONS:
+• Sedan: 4.5m long, 1.8m wide, 1.5m high
+• Pedestrian: 1.7m tall adult
+• Road Lane: 3.5m wide
+• Traffic Light: 5m tall pole
+• Crosswalk: 3m wide
+
+Use this scene to:
+1. Identify scale discrepancies
+2. Adjust asset scales incrementally  
+3. Validate proportions before applying to gameplay"
+font_size = 24
+outline_size = 2

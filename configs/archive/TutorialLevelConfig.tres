@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://beqaciwwle7gv"]
+
+[ext_resource type="Script" uid="uid://fhkt8vo1a8vg" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(-12, 10, 20),
+"rotation": Vector3(-30, 0, 0)
+}])
+level_name = "Tutorial Level Configuration"
+welcome_message = "Welcome to the tutorial! Learn traffic control fundamentals."
+difficulty = "Medium"
+level_description = "A comprehensive tutorial level covering basic to intermediate traffic management concepts."
+max_vehicles = 5
+vehicle_spawn_rate = 1.5
+vehicle_speed_min = 2.0
+vehicle_speed_max = 5.0
+allow_emergency_vehicles = false
+time_limit = 60.0
+target_vehicles_passed = 10
+max_collisions_allowed = 2
+max_wait_time = 12.0

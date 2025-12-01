@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c4oxd5tl4sw6p"]
+
+[ext_resource type="Script" uid="uid://fhkt8vo1a8vg" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(-12, 20, 8),
+"rotation": Vector3(-50, -35, 0)
+}, {
+"position": Vector3(12, 16, 4),
+"rotation": Vector3(-45, 60, 0)
+}, {
+"position": Vector3(0, 25, 18),
+"rotation": Vector3(-55, 0, 0)
+}, {
+"position": Vector3(-5, 14, 12),
+"rotation": Vector3(-40, -15, 0)
+}])
+level_name = "Tutorial - Advanced Traffic Master"
+welcome_message = "Master level! Manage heavy traffic with minimal errors. Good luck!"
+difficulty = "Hard"
+level_description = "Complex intersections with high traffic density and time pressure. Only the most skilled traffic controllers succeed here."
+max_vehicles = 10
+vehicle_spawn_rate = 2.5
+vehicle_speed_min = 3.0
+vehicle_speed_max = 6.5
+allow_emergency_vehicles = true
+time_limit = 60.0
+target_vehicles_passed = 20
+max_collisions_allowed = 1
+max_wait_time = 10.0

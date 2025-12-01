@@ -1,0 +1,68 @@
+# Godot 4+ specific ignores
+.godot/
+.import/
+**/[B]build/
+**/[B]builds
+
+# Mono-specific ignores (C# projects)
+.mono/
+data_*/
+mono_crash.*.json
+
+# System/Editor files
+.tmp/
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.log
+
+# Build outputs
+*.exe
+*.app
+*.deb
+*.dmg
+*.pkg
+*.apk
+*.aab
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# Android Studio
+android/.gradle/
+android/local.properties
+android/.idea/
+android/app/build/
+android/gradle/
+android/gradlew
+android/gradlew.bat
+
+# Android build outputs (large files) - exclude entire build directory
+android/build/
+
+# Godot export builds (large files)
+builds/
+
+# Temporary files
+**/temp/
+**/tmp/
+
+# OS generated files
+.DS_Store?
+ehthumbs.db
+Icon?
+
+# Documentation files should be tracked for project continuity
+# DEVELOPMENT_NOTES.md - IMPORTANT: This file should be committed
+# README.md, WARP.md, and other .md files should also be tracked
+
+# Local development temporary files (if any specific local notes needed)
+# local_notes.md
+# personal_dev_notes.txt

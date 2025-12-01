@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://q61byh6m33k3"]
+
+[ext_resource type="Script" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(0, 12, 12),
+"rotation": Vector3(-12, -5, 0)
+}, {
+"position": Vector3(10, 10, 8),
+"rotation": Vector3(-30, 30, 0)
+}])
+level_name = "Tutorial - Basic Traffic Control"
+welcome_message = "Welcome to Traffic Control! Learn the basics of managing intersections."
+difficulty = "Easy"
+level_description = "Introduction to traffic light control. Click on vehicles to stop them at intersections and prevent collisions."
+max_vehicles = 3
+vehicle_spawn_rate = 0.5
+vehicle_speed_min = 1.5
+vehicle_speed_max = 3.0
+allow_emergency_vehicles = false
+time_limit = 90.0
+target_vehicles_passed = 6
+max_collisions_allowed = 3
+max_wait_time = 20.0

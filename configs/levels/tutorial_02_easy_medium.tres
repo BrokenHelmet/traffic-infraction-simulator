@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://tutorial_02_easy_medium"]
+
+[ext_resource type="Script" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(4.5, 8, -2),
+"rotation": Vector3(-25, 0, 0)
+}, {
+"position": Vector3(8, 10, 2),
+"rotation": Vector3(-35, 20, 0)
+}, {
+"position": Vector3(-4, 14, -6),
+"rotation": Vector3(-40, -15, 0)
+}])
+level_name = "Tutorial 2: Building Skills"
+welcome_message = "Good progress! Now handle more vehicles and learn timing."
+difficulty = "Easy-Medium"
+level_description = "Increased traffic flow with more vehicles. Learn to manage timing and handle multiple vehicles approaching the intersection simultaneously. Perfect for testing traffic light amber logic with 2 vehicles per lane."
+max_vehicles = 4
+vehicles_per_path = 2
+vehicle_spawn_rate = 2.0
+allow_emergency_vehicles = false
+max_pedestrians = 3
+pedestrian_spawn_rate = 0.8
+pedestrian_speed_min = 1.0
+pedestrian_speed_max = 2.0
+required_vehicles = 8
+required_pedestrians = 4
+target_score = 0
+score_thresholds = []

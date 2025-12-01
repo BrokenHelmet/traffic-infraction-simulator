@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://do2bjcgo374xe"]
+
+[ext_resource type="PackedScene" uid="uid://bh8xqw7r8m5vp" path="res://scenes/cameras/CameraRig.tscn" id="1_camera_rig"]
+[ext_resource type="Script" uid="uid://cl1jtv06ejjqe" path="res://scripts/CameraRigTestController.gd" id="2_controller"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+
+[node name="CameraRigTest" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="GroundPlane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_1")
+
+[node name="TestObjects" type="Node3D" parent="."]
+
+[node name="Cube1" type="MeshInstance3D" parent="TestObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Cube2" type="MeshInstance3D" parent="TestObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Cube3" type="MeshInstance3D" parent="TestObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+mesh = SubResource("BoxMesh_1")
+
+[node name="CameraRig" parent="." instance=ExtResource("1_camera_rig")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+
+[node name="UI Menu" type="CanvasLayer" parent="."]

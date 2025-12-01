@@ -1,0 +1,38 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://clil5vt78eglu"]
+
+[ext_resource type="Script" uid="uid://fhkt8vo1a8vg" path="res://scripts/LevelConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+camera_positions = Array[Dictionary]([{
+"position": Vector3(4.5, 8, -2),
+"rotation": Vector3(-20, 0, 0)
+}, {
+"position": Vector3(0, 15, 0),
+"rotation": Vector3(-45, 0, 0)
+}, {
+"position": Vector3(-8, 12, -8),
+"rotation": Vector3(-30, -45, 0)
+}])
+level_name = "Test Configuration"
+difficulty = "Test"
+level_description = "A simple test environment for developers to experiment with traffic management mechanics and debug issues."
+welcome_message = "Development test level for debugging and experimentation."
+max_vehicles = 5
+vehicles_per_path = 1
+vehicle_spawn_rate = 1.0
+allow_emergency_vehicles = true
+max_pedestrians = 0
+pedestrian_spawn_rate = 1.0
+pedestrian_speed_min = 1.0
+pedestrian_speed_max = 2.0
+required_vehicles = 0
+required_pedestrians = 0
+target_score = 0
+score_thresholds = Array[int]([])
+vehicle_speed_min = 16.0
+vehicle_speed_max = 24.0
+time_limit = 120.0
+target_vehicles_passed = 10
+max_collisions_allowed = 5
+max_wait_time = 15.0
