@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5dcpar4b81q1"]
+[gd_scene format=3 uid="uid://c5dcpar4b81q1"]
 
 [ext_resource type="Script" uid="uid://dx1b6ia00wvyk" path="res://scripts/LandingScreen.gd" id="1_landing"]
 
@@ -29,7 +29,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="LandingScreen" type="Control"]
+[node name="LandingScreen" type="Control" unique_id=1664979463]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_landing")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="." unique_id=1975734926]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_background")
 
-[node name="MainContainer" type="VBoxContainer" parent="."]
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=1269011304]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,16 +61,16 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleContainer" type="VBoxContainer" parent="MainContainer"]
+[node name="TitleContainer" type="VBoxContainer" parent="MainContainer" unique_id=1911356133]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TitleBackground" type="Panel" parent="MainContainer/TitleContainer"]
+[node name="TitleBackground" type="Panel" parent="MainContainer/TitleContainer" unique_id=1029179351]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_title_bg")
 
-[node name="GameTitle" type="Label" parent="MainContainer/TitleContainer/TitleBackground"]
+[node name="GameTitle" type="Label" parent="MainContainer/TitleContainer/TitleBackground" unique_id=1939085649]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -93,7 +93,7 @@ SIMULATOR"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="MainContainer/TitleContainer/TitleBackground"]
+[node name="SubtitleLabel" type="Label" parent="MainContainer/TitleContainer/TitleBackground" unique_id=419354002]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -110,21 +110,21 @@ text = "Play the role of investigator to keep our streets safe"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="MainContainer"]
+[node name="Spacer" type="Control" parent="MainContainer" unique_id=1817782737]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PromptContainer" type="VBoxContainer" parent="MainContainer"]
+[node name="PromptContainer" type="VBoxContainer" parent="MainContainer" unique_id=987858889]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="PromptBackground" type="Panel" parent="MainContainer/PromptContainer"]
+[node name="PromptBackground" type="Panel" parent="MainContainer/PromptContainer" unique_id=833071977]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_prompt_bg")
 
-[node name="TouchPrompt" type="Label" parent="MainContainer/PromptContainer"]
+[node name="TouchPrompt" type="Label" parent="MainContainer/PromptContainer" unique_id=1488419209]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
@@ -136,7 +136,7 @@ text = "TOUCH ANYWHERE TO START"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VersionLabel" type="Label" parent="."]
+[node name="VersionLabel" type="Label" parent="." unique_id=199390494]
 layout_mode = 1
 offset_right = 100.0
 offset_bottom = 45.0

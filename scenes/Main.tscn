@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://b8wvf5k1lun6v" path="res://scripts/MainController.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://c5dcpar4b81q1" path="res://scenes/ui/LandingScreen.tscn" id="2_landing"]
 [ext_resource type="PackedScene" uid="uid://b3g31x8htmrb3" path="res://scenes/SplashScreen.tscn" id="3_rarhs"]
+[ext_resource type="Script" uid="uid://cxy074yj6eysa" path="res://scripts/GameHUD.gd" id="4_rarhs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0bbpv"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node" unique_id=1020229756]
 script = ExtResource("1_main")
@@ -26,6 +31,39 @@ anchor_bottom = 0.5
 
 [node name="FadeOverlay" parent="SplashScreen" index="1"]
 color = Color(1, 1, 1, 1)
+
+[node name="GameHUD" type="CanvasLayer" parent="." unique_id=613642537]
+script = ExtResource("4_rarhs")
+
+[node name="Control" type="Control" parent="GameHUD" unique_id=412506474]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="GameHUD/Control" unique_id=1749688027]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -61.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_0bbpv")
+
+[node name="MessageLabel" type="Label" parent="GameHUD/Control" unique_id=1963083963]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Message"
+label_settings = SubResource("LabelSettings_0bbpv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameHUD/Control" unique_id=1444762592]
 
 [connection signal="start_game_requested" from="LandingScreen" to="." method="_on_landing_screen_start_game_requested"]
 

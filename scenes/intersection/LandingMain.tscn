@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://diow2whvir3wc"]
+[gd_scene format=3 uid="uid://diow2whvir3wc"]
 
 [ext_resource type="Script" uid="uid://dsifspiyxu7wo" path="res://scripts/Main.gd" id="1_2yx70"]
 [ext_resource type="Resource" uid="uid://bf3tm7o2lwyk0" path="res://configs/levels/level_1.tres" id="2_sleug"]
@@ -29,33 +29,33 @@ albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_nha0i"]
 material = SubResource("StandardMaterial3D_u1xfj")
 
-[node name="Main" type="Node2D"]
+[node name="MainLandingLevel" type="Node2D" unique_id=525841088]
 script = ExtResource("1_2yx70")
 level_configs = Array[Resource]([ExtResource("2_sleug")])
 version_font_size = 32
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=418787508]
 environment = SubResource("Environment_jq7ux")
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." unique_id=2112293303]
 script = ExtResource("3_sleug")
 
-[node name="VehicleSpawTimer" type="Timer" parent="."]
+[node name="VehicleSpawTimer" type="Timer" parent="." unique_id=1851812]
 
-[node name="GroundPlane" type="MeshInstance3D" parent="."]
+[node name="GroundPlane" type="MeshInstance3D" parent="." unique_id=1324707252]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_nha0i")
 
-[node name="PauseManager" type="Node" parent="."]
+[node name="PauseManager" type="Node" parent="." unique_id=1344563706]
 script = ExtResource("3_arj57")
 action_names = Array[StringName]([&"ui_cancel", &"pause"])
 
-[node name="UI Menu" type="CanvasLayer" parent="."]
+[node name="UI Menu" type="CanvasLayer" parent="." unique_id=608720957]
 follow_viewport_enabled = true
 
-[node name="PauseOverlay" parent="UI Menu" instance=ExtResource("4_hg886")]
+[node name="PauseOverlay" parent="UI Menu" unique_id=1680638442 instance=ExtResource("4_hg886")]
 
-[node name="StartGameButton" type="Button" parent="UI Menu"]
+[node name="StartGameButton" type="Button" parent="UI Menu" unique_id=2007328891]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,10 +70,10 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 72
 text = "Play Tutorial"
 
-[node name="CameraRig" parent="." instance=ExtResource("5_n8sbq")]
+[node name="CameraRig" parent="." unique_id=380822618 instance=ExtResource("5_n8sbq")]
 transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 5, 0)
 
-[node name="CameraDebugDisplay" type="Control" parent="CameraRig"]
+[node name="CameraDebugDisplay" type="Control" parent="CameraRig" unique_id=1108856414]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +86,7 @@ mouse_filter = 2
 script = ExtResource("6_iv637")
 debug_font_size = 32
 
-[node name="CameraDebugLabel" type="Label" parent="CameraRig/CameraDebugDisplay"]
+[node name="CameraDebugLabel" type="Label" parent="CameraRig/CameraDebugDisplay" unique_id=594655144]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
