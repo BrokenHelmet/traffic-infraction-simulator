@@ -119,7 +119,7 @@ func _input(event: InputEvent) -> void:
 	# Add a raycast from the camera center point to the scene and work out what is hit
 	
 	var _viewport = get_viewport()
-	var _camera = _viewport.get_camera_3d
+	var _camera = _viewport.get_camera_3d()
 	#var _raycast = 
 	var _ray_origin = _camera.project_ray_origin(_viewport.get_mouse_position())
 	var _ray_end = _ray_origin + _camera.project_ray_normal(_viewport.get_mouse_position()) * 1000

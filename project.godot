@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Traffic Infraction Simulator"
 config/version="0.0.1"
 run/main_scene="res://scenes/Main.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.6")
 run/max_fps=60
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -50,30 +54,9 @@ pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 
-3d_physics/layer_1="Vehicle"
-3d_navigation/layer_1="Vehicle_Roads"
-3d_physics/layer_2="Traffic_Light_Sensor"
-3d_navigation/layer_2="Emergency_Routes"
-3d_physics/layer_3="Pedestrian"
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Vehicle_Infractions"
 3d_navigation/layer_3="Pedestrian_Walkways"
-3d_physics/layer_4="Static_Obstacle"
-3d_navigation/layer_4="Public_Transport"
-3d_physics/layer_5="Emergency_Vehicle"
-3d_navigation/layer_5="Delivery_Routes"
-3d_physics/layer_6="Pedestrian_Sensor"
-3d_navigation/layer_6="Bicycle_Paths"
-3d_physics/layer_7="Vehicle_Sensor"
-3d_navigation/layer_7="Service_Access"
-3d_physics/layer_8="Road_Surface"
-3d_navigation/layer_8="Restricted_Areas"
-3d_physics/layer_9="Sidewalk"
-3d_physics/layer_10="Intersection_Zone"
-3d_physics/layer_11="Parking_Zone"
-3d_physics/layer_12="No_Parking_Zone"
-3d_physics/layer_13="Speed_Zone"
-3d_physics/layer_14="One_Way_Zone"
-3d_physics/layer_15="Construction_Zone"
-3d_physics/layer_16="Camera_Collision"
 avoidance/layer_1="Vehicle"
 avoidance/layer_2="Traffic_Light_Sensor"
 avoidance/layer_3="Pedestrian"

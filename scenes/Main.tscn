@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpgjr7vh8xnqe"]
+[gd_scene format=3 uid="uid://dpgjr7vh8xnqe"]
 
 [ext_resource type="Script" uid="uid://b8wvf5k1lun6v" path="res://scripts/MainController.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://c5dcpar4b81q1" path="res://scenes/ui/LandingScreen.tscn" id="2_landing"]
 [ext_resource type="PackedScene" uid="uid://b3g31x8htmrb3" path="res://scenes/SplashScreen.tscn" id="3_rarhs"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1020229756]
 script = ExtResource("1_main")
 metadata/_edit_vertical_guides_ = [540.0]
 metadata/_edit_horizontal_guides_ = [960.0]
 
-[node name="LandingScreen" parent="." instance=ExtResource("2_landing")]
+[node name="LandingScreen" parent="." unique_id=1841884185 instance=ExtResource("2_landing")]
 
-[node name="SplashScreen" parent="." instance=ExtResource("3_rarhs")]
+[node name="SplashScreen" parent="." unique_id=1301678257 instance=ExtResource("3_rarhs")]
 color = Color(1, 1, 1, 1)
 video_file_path = ""
 show_skip_after = 3.0
