@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://do8ci1iq7e5rh"]
+[gd_scene format=3 uid="uid://do8ci1iq7e5rh"]
 
-[ext_resource type="Script" uid="uid://5b22q10ha5d6" path="res://scripts/LevelSelectionController.gd" id="1_3k4f8"]
+[ext_resource type="Script" uid="uid://5b22q10ha5d6" path="res://scripts/ui_level_selection.gd" id="1_3k4f8"]
 [ext_resource type="FontFile" uid="uid://dd1xladvb4ugb" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="2_rd42k"]
 
-[node name="LevelSelectionMenu" type="Control"]
+[node name="LevelSelectionMenu" type="Control" unique_id=1670911663]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 3
 anchors_preset = 5
@@ -19,7 +19,7 @@ size_flags_vertical = 3
 script = ExtResource("1_3k4f8")
 debug_mode = true
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=792471622]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.1, 0.95)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=482346602]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,13 +37,13 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=622664457]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=911072636]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_rd42k")
@@ -52,7 +52,7 @@ text = "◆ SELECT TRAFFIC CONTROL LEVEL ◆"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="SubtitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="SubtitleLabel" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1248076369]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
@@ -62,20 +62,20 @@ text = "Choose your difficulty level and traffic scenario"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer" unique_id=1358578974]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="LevelButtonsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="LevelButtonsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=1046146298]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer" unique_id=1596200819]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="CloseButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="ScrollContainer/VBoxContainer" unique_id=1124158155]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 4

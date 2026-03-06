@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dpgjr7vh8xnqe"]
+
+[ext_resource type="Script" uid="uid://b8wvf5k1lun6v" path="res://scripts/app_controller.gd" id="1_frup3"]
+[ext_resource type="PackedScene" uid="uid://diow2whvir3wc" path="res://scenes/intersection/game_level_base.tscn" id="2_3flsc"]
+[ext_resource type="PackedScene" uid="uid://c5dcpar4b81q1" path="res://scenes/ui/LandingScreen.tscn" id="2_a3qyh"]
+[ext_resource type="PackedScene" uid="uid://b3g31x8htmrb3" path="res://scenes/SplashScreen.tscn" id="3_3flsc"]
+[ext_resource type="PackedScene" uid="uid://b60a0s54ui15q" path="res://scenes/ui/ui_game_hud.tscn" id="4_frup3"]
+
+[node name="AppRoot" type="Node" unique_id=1020229756 node_paths=PackedStringArray("level_container", "splash_screen", "landing_screen", "hud")]
+script = ExtResource("1_frup3")
+level_scene = ExtResource("2_3flsc")
+level_container = NodePath("LevelContainer")
+splash_screen = NodePath("SplashScreen")
+landing_screen = NodePath("LandingScreen")
+hud = NodePath("GameHUD")
+metadata/_edit_vertical_guides_ = [540.0]
+metadata/_edit_horizontal_guides_ = [960.0]
+
+[node name="LandingScreen" parent="." unique_id=1841884185 instance=ExtResource("2_a3qyh")]
+visible = false
+
+[node name="SplashScreen" parent="." unique_id=1301678257 instance=ExtResource("3_3flsc")]
+color = Color(1, 1, 1, 1)
+video_file_path = ""
+show_skip_after = 3.0
+
+[node name="VideoStreamPlayer" parent="SplashScreen" index="0"]
+custom_minimum_size = Vector2(700, 700)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="FadeOverlay" parent="SplashScreen" index="1"]
+color = Color(1, 1, 1, 1)
+
+[node name="LevelContainer" type="Node3D" parent="." unique_id=625338600]
+
+[node name="GameHUD" parent="." unique_id=206782185 instance=ExtResource("4_frup3")]
+visible = false
+
+[connection signal="start_game_requested" from="LandingScreen" to="." method="_on_landing_screen_start_game_requested"]
+
+[editable path="SplashScreen"]

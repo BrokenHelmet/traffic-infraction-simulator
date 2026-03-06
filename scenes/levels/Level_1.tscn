@@ -1,57 +1,57 @@
-[gd_scene load_steps=7 format=3 uid="uid://v3nxq455mh4x"]
+[gd_scene format=3 uid="uid://v3nxq455mh4x"]
 
 [ext_resource type="PackedScene" uid="uid://dxdcekj3sttp2" path="res://assets/kenney_city-kit-roads/road-straight.glb" id="1_76pos"]
 [ext_resource type="PackedScene" uid="uid://dt6i7qyfy85ne" path="res://assets/kenney_city-kit-roads/road-crossing.glb" id="2_j7fuo"]
 [ext_resource type="PackedScene" uid="uid://sc2m4gnnkbw6" path="res://scenes/intersection/OverheadTrafficLight.tscn" id="3_hmplg"]
-[ext_resource type="Script" uid="uid://c4osfbsgng7im" path="res://scripts/IncidentInspectionAction.gd" id="4_5x2jh"]
+[ext_resource type="Script" uid="uid://c4osfbsgng7im" path="res://scripts/incident_inspection_action.gd" id="4_5x2jh"]
 [ext_resource type="PackedScene" uid="uid://r331t8egskgv" path="res://assets/kenney_car-kit/ambulance.glb" id="4_cnmxh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5x2jh"]
 size = Vector3(2.5, 3, 6)
 
-[node name="TutorialLevel" type="Node3D"]
+[node name="TutorialLevel" type="Node3D" unique_id=465571656]
 
-[node name="RoadNodes" type="Node3D" parent="."]
+[node name="RoadNodes" type="Node3D" parent="." unique_id=221224148]
 
-[node name="road-straight2" parent="RoadNodes" instance=ExtResource("1_76pos")]
+[node name="road-straight2" parent="RoadNodes" unique_id=568740383 instance=ExtResource("1_76pos")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -30)
 
-[node name="road-straight3" parent="RoadNodes" instance=ExtResource("1_76pos")]
+[node name="road-straight3" parent="RoadNodes" unique_id=332661752 instance=ExtResource("1_76pos")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -20)
 
-[node name="road-straight4" parent="RoadNodes" instance=ExtResource("1_76pos")]
+[node name="road-straight4" parent="RoadNodes" unique_id=1268156055 instance=ExtResource("1_76pos")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -10)
 
-[node name="road-crossing2" parent="RoadNodes" instance=ExtResource("2_j7fuo")]
+[node name="road-crossing2" parent="RoadNodes" unique_id=147901300 instance=ExtResource("2_j7fuo")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="road-straight5" parent="RoadNodes" instance=ExtResource("1_76pos")]
+[node name="road-straight5" parent="RoadNodes" unique_id=1872111871 instance=ExtResource("1_76pos")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 10)
 
-[node name="road-straight6" parent="RoadNodes" instance=ExtResource("1_76pos")]
+[node name="road-straight6" parent="RoadNodes" unique_id=1725882267 instance=ExtResource("1_76pos")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 20)
 
-[node name="road-straight7" parent="RoadNodes" instance=ExtResource("1_76pos")]
+[node name="road-straight7" parent="RoadNodes" unique_id=2100794333 instance=ExtResource("1_76pos")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 30)
 
-[node name="OverheadTrafficLight" parent="." instance=ExtResource("3_hmplg")]
+[node name="OverheadTrafficLight" parent="." unique_id=286966646 instance=ExtResource("3_hmplg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
 script = null
 
 [node name="CollisionShape3D" parent="OverheadTrafficLight/RedLightSensor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3.7, 0)
 
-[node name="Infraction_1" type="Node3D" parent="."]
+[node name="Infraction_1" type="Node3D" parent="." unique_id=1195386556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.83246)
 script = ExtResource("4_5x2jh")
 incident_name = "Trial Incident 1"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Infraction_1"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Infraction_1" unique_id=1673292243]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Infraction_1/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Infraction_1/StaticBody3D" unique_id=233346531]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65981, 0)
 shape = SubResource("BoxShape3D_5x2jh")
 
-[node name="ambulance" parent="Infraction_1/StaticBody3D" instance=ExtResource("4_cnmxh")]
+[node name="ambulance" parent="Infraction_1/StaticBody3D" unique_id=1126775887 instance=ExtResource("4_cnmxh")]
 
 [editable path="OverheadTrafficLight"]

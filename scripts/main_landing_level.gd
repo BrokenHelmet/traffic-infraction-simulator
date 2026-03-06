@@ -12,16 +12,6 @@ extends Node2D
 # TODO: Add scoring system integration
 # =============================================================================
 
-# Debug settings
-@export_group("Debug Settings")
-@export var debug_mode: bool = false            # Enable all debug logging
-@export var debug_ui: bool = false              # Enable UI creation debug output
-@export var debug_level: bool = false           # Enable level loading debug output
-@export var debug_camera: bool = false          # Enable camera system debug output
-@export var debug_config: bool = false          # Enable config system debug output
-@export var debug_timer: bool = false            # Enable timer system debug output
-@export var debug_scoring: bool = false          # Enable scoring system debug output
-@export var debug_game: bool = false             # Enable game manager debug output
 
 var current_level_config: Resource  # Can hold any resource type
 var current_level
@@ -49,13 +39,9 @@ var config_debug_label: Label
 
 # Camera debug display
 var camera_debug_label: Label
-@export var debug_font_size: int = 14
-var camera_reference: Camera3D
-
-# Old camera management system removed - using CameraRig in levels
 
 # Camera rig control (newer system)
-var camera_rig: Node3D  # Reference to CameraRig in level scene
+@export var camera_rig: Node3D  # Reference to CameraRig in level scene
 
 # Timer system control
 var game_timer: Control  # Reference to GameTimer in UI
@@ -76,9 +62,25 @@ var pause_manager: PauseManager
 var pause_button: Button
 var is_level_loaded: bool = false
 
+# Debug settings
+@export_group("Debug Settings")
+@export var debug_mode: bool = false            # Enable all debug logging
+@export var debug_ui: bool = false              # Enable UI creation debug output
+@export var debug_level: bool = false           # Enable level loading debug output
+@export var debug_camera: bool = false          # Enable camera system debug output
+@export var debug_config: bool = false          # Enable config system debug output
+@export var debug_timer: bool = false            # Enable timer system debug output
+@export var debug_scoring: bool = false          # Enable scoring system debug output
+@export var debug_game: bool = false             # Enable game manager debug output
+@export var debug_font_size: int = 14
+
 func _ready():
 	# Get reference to PauseManager
 	pause_manager = get_node_or_null("PauseManager")
+		
+	set_camera_rig_enabled(false)
+	
+		
 	if not pause_manager:
 		debug_print("WARNING: PauseManager not found", "ui")
 	
@@ -209,8 +211,10 @@ func _load_level(_new_lvl) -> void:
 	else:
 		debug_print("⚠️  Warning: No valid level configuration found", "level")
 	
-
-	get_tree().current_scene.add_child(current_level)
+	if get_tree().current_scene.get("level_container") != null:
+		get_tree().current_scene.level_container.add_child(current_level)
+	else:
+		get_tree().current_scene.add_child(current_level)
 	
 	# Show pause button now that level is loaded
 	show_pause_button()
@@ -308,6 +312,9 @@ func set_camera_rig_ui_visible(show_ui: bool):
 
 # Enable or disable the entire CameraRig system
 func set_camera_rig_enabled(enabled: bool):
+	if not camera_rig:
+		camera_rig = find_camera_rig_recursive(self)
+	
 	if not camera_rig or not camera_rig.has_method("set_camera_rig_enabled"):
 		return
 	
@@ -675,6 +682,7 @@ func _on_countdown_completed():
 	# Enable gameplay active flag for pause on focus loss
 	if pause_manager and pause_manager.has_method("set_gameplay_active"):
 		pause_manager.set_gameplay_active(true)
+		set_camera_rig_enabled(true)
 		debug_print("Gameplay active flag enabled", "timer")
 	
 	# Show all gameplay UI now that level has started
@@ -697,6 +705,7 @@ func _on_timer_expired():
 	# Disable gameplay active flag
 	if pause_manager and pause_manager.has_method("set_gameplay_active"):
 		pause_manager.set_gameplay_active(false)
+		set_camera_rig_enabled(false)
 		debug_print("Gameplay active flag disabled", "timer")
 	
 	# Stop game systems
@@ -726,6 +735,7 @@ func _on_level_retry_requested():
 	# Reset gameplay active flag before restart
 	if pause_manager and pause_manager.has_method("set_gameplay_active"):
 		pause_manager.set_gameplay_active(false)
+		set_camera_rig_enabled(false)
 		debug_print("Gameplay active flag reset for retry", "timer")
 	
 	# Restart current level
@@ -765,7 +775,7 @@ func initialize_game_manager(level_scene: Node):
 		game_manager = null
 	
 	# Create new GameManager instance
-	var GameManagerScript = load("res://scripts/GameManager.gd")
+	var GameManagerScript = load("res://scripts/gameplay_manager.gd")
 	game_manager = GameManagerScript.new()
 	game_manager.name = "GameManager"
 	game_manager.process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -876,6 +886,7 @@ func cleanup_current_level():
 	# Reset gameplay active flag
 	if pause_manager and pause_manager.has_method("set_gameplay_active"):
 		pause_manager.set_gameplay_active(false)
+		set_camera_rig_enabled(false)
 		debug_print("Gameplay active flag reset", "level")
 	
 	# Cleanup camera systems

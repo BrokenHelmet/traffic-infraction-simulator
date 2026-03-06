@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b60a0s54ui15q"]
+
+[ext_resource type="Script" uid="uid://cxy074yj6eysa" path="res://scripts/ui_game_hud.gd" id="1_it0ey"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0bbpv"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GameHUD" type="CanvasLayer" unique_id=206782185]
+script = ExtResource("1_it0ey")
+
+[node name="Control" type="Control" parent="." unique_id=192925632]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="Control" unique_id=1466118323]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -61.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_0bbpv")
+
+[node name="MessageLabel" type="Label" parent="Control" unique_id=1557087468]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Message"
+label_settings = SubResource("LabelSettings_0bbpv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control" unique_id=1925845104]

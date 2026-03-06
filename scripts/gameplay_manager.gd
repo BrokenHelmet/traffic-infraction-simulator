@@ -1,5 +1,10 @@
 extends Node
 
+signal session_complete(summary: Dictionary)
+
+# Signal for when the level is finished (to report back to AppRoot)
+signal level_completed(summary: Dictionary)
+
 # =============================================================================
 # GAME MANAGER
 # =============================================================================
@@ -20,6 +25,9 @@ extends Node
 var main_controller: Node2D
 var level_config: Resource
 var spawn_timer: Timer
+
+# This is to the HUD directly during gameplay
+@onready var hud = get_node("/root/AppRoot/GameHUD")
 
 # Vehicle management
 var active_vehicles: Array[CharacterBody3D] = []
@@ -42,6 +50,8 @@ var collisions_count: int = 0
 var level_start_time: float = 0.0
 var is_level_active: bool = false
 
+var current_score: int = 0
+
 # Spawning control
 var can_spawn_vehicles: bool = true
 var can_spawn_pedestrians: bool = true
@@ -49,7 +59,6 @@ var can_spawn_pedestrians: bool = true
 signal vehicle_passed
 signal pedestrian_passed
 signal vehicle_collision
-signal level_completed(success: bool)
 
 # =============================================================================
 # DEBUG HELPER FUNCTIONS
@@ -133,6 +142,10 @@ func _input(event: InputEvent) -> void:
 		#elif event is InputEventMouseButton:
 			#if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
 				#print ("Target incident has been hit via mouse", event.button_index)
+
+func _on_infraction_confirmed(points: int):
+	current_score += points
+	hud.update_score(current_score) # First Mate handles the live updates
 
 func _check_level_objectives():
 	"""Check if level objectives have been met"""

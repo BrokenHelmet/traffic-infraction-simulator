@@ -18,6 +18,11 @@ var fade_tween: Tween
 var pulse_tween: Tween
 
 func _ready():
+	
+	await get_node("../SplashScreen").splash_completed
+	
+	visible = true
+	
 	# Set version from project settings
 	var version = ProjectSettings.get_setting("application/config/version", "1.05")
 	version_label.text = "v" + version
@@ -34,9 +39,9 @@ func start_pulse_animation():
 	pulse_tween.tween_property(touch_prompt, "modulate", Color(1, 1, 1, 0.6), 1.0)
 	pulse_tween.tween_property(touch_prompt, "modulate", Color(1, 1, 1, 1.0), 1.0)
 
-func _on_gui_input(event: InputEvent):
+func _input(event):
 	# Handle touch, mouse click, or key press to start game
-	if is_transitioning:
+	if is_transitioning or not visible:
 		return
 	
 	var should_start = false
@@ -59,7 +64,7 @@ func _on_gui_input(event: InputEvent):
 func start_transition_to_game():
 	if is_transitioning:
 		return
-	
+		
 	is_transitioning = true
 	
 	# Stop the pulsing animation
@@ -83,11 +88,6 @@ func start_transition_to_game():
 	
 	print("Landing screen transition complete - emitting start game signal")
 	start_game_requested.emit()
-
-func _input(event):
-	# Global input handling for any missed events
-	if not is_transitioning:
-		_on_gui_input(event)
 
 # Function to be called externally if needed
 func trigger_start_game():
