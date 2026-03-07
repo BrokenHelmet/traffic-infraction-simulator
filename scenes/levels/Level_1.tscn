@@ -46,12 +46,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.83246)
 script = ExtResource("4_5x2jh")
 incident_name = "Trial Incident 1"
 
+[node name="ambulance" parent="Infraction_1" unique_id=1126775887 instance=ExtResource("4_cnmxh")]
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Infraction_1" unique_id=1673292243]
+disable_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Infraction_1/StaticBody3D" unique_id=233346531]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65981, 0)
 shape = SubResource("BoxShape3D_5x2jh")
-
-[node name="ambulance" parent="Infraction_1/StaticBody3D" unique_id=1126775887 instance=ExtResource("4_cnmxh")]
 
 [editable path="OverheadTrafficLight"]

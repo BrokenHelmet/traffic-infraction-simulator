@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 # -----------------------------
 func _raycast_to_clickable(screen_pos: Vector2) -> Clickable3D:
 	if camera == null:
+		push_error("No camera has been found")
 		return null
 
 	var from: Vector3 = camera.project_ray_origin(screen_pos)
@@ -82,7 +83,7 @@ func _raycast_to_clickable(screen_pos: Vector2) -> Clickable3D:
 	query.collide_with_areas = true
 
 	var result = space_state.intersect_ray(query)
-	if result.empty():
+	if result.is_empty():
 		return null
 
 	var collider: Node = result["collider"] as Node
@@ -106,7 +107,7 @@ func _get_hit_position(screen_pos: Vector2) -> Vector3:
 	query.collide_with_areas = true
 
 	var result = space_state.intersect_ray(query)
-	if result.empty():
+	if result.is_empty():
 		return Vector3.ZERO
 
 	return result["position"] as Vector3

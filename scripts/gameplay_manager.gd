@@ -27,7 +27,7 @@ var level_config: Resource
 var spawn_timer: Timer
 
 # This is to the HUD directly during gameplay
-@onready var hud = get_node("/root/AppRoot/GameHUD")
+@onready var hud = get_node_or_null("/root/AppRoot/GameHUD")   # This will silently fail
 
 # Vehicle management
 var active_vehicles: Array[CharacterBody3D] = []

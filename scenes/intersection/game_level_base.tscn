@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://bf3tm7o2lwyk0" path="res://configs/levels/level_1.tres" id="2_pewlk"]
 [ext_resource type="Script" uid="uid://t5d7vrhe53kn" path="res://scripts/gameplay_manager.gd" id="3_sbb47"]
 [ext_resource type="Script" uid="uid://pufa5j3dyvvg" path="res://addons/pause-manager/scripts/pause_manager.gd" id="4_87sc1"]
+[ext_resource type="Script" uid="uid://t0y67ltoayum" path="res://scripts/mobile_clickable_3d_manager.gd" id="4_pewlk"]
 [ext_resource type="PackedScene" uid="uid://brj4ack3c3b5m" path="res://scenes/ui/PauseOverlay.tscn" id="5_bw0ae"]
 [ext_resource type="PackedScene" uid="uid://bh8xqw7r8m5vp" path="res://scenes/cameras/CameraRig.tscn" id="6_txo1e"]
 [ext_resource type="Script" uid="uid://c6j74wd5dme4x" path="res://scripts/CameraDebugDisplay.gd" id="7_68t7u"]
@@ -40,7 +41,8 @@ environment = SubResource("Environment_jq7ux")
 [node name="GameplayManager" type="Node" parent="." unique_id=2112293303]
 script = ExtResource("3_sbb47")
 
-[node name="VehicleSpawTimer" type="Timer" parent="." unique_id=1851812]
+[node name="Clickable3DManager" type="Node3D" parent="." unique_id=1760675973]
+script = ExtResource("4_pewlk")
 
 [node name="GroundPlane" type="MeshInstance3D" parent="." unique_id=1324707252]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)

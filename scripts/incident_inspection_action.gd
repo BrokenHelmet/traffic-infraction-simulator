@@ -11,6 +11,7 @@ func _ready() -> void:
 		push_warning("IncidentInspectionAction: No StaticBody3D child found!")
 
 func on_click(hit_position: Vector3) -> void:
+	print("SUCCESS: Incident detected -> ", incident_name)
 	# Call base class (debug print / signal) if needed
 	super.on_click(hit_position)
 
