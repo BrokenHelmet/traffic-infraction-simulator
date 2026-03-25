@@ -47,6 +47,11 @@ func _input(event: InputEvent) -> void:
 					clickable.on_click(hit_position)
 				else:
 					clickable.on_long_press(hit_position)
+		else:
+			# No clickable hit - register false positive
+			var score_manager = get_tree().get_first_node_in_group("score_manager")
+			if score_manager:
+				score_manager.register_false_positive()
 
 		# Reset touch state
 		active_touch = false

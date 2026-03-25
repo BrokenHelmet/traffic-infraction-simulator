@@ -9,12 +9,18 @@ class_name IncidentInspectionAction
 func _ready() -> void:
 	if static_body_3d == null:
 		push_warning("IncidentInspectionAction: No StaticBody3D child found!")
+		
+	#long_pressed.connect(on_long_press)
+	clicked.connect(on_click)
 
 func on_click(hit_position: Vector3) -> void:
 	print("SUCCESS: Incident detected -> ", incident_name)
 	# Call base class (debug print / signal) if needed
-	super.on_click(hit_position)
+	#super.on_click(hit_position)
 
+	var score_manager = get_tree().get_first_node_in_group("score_manager")
+	if score_manager:
+		score_manager.register_infraction_found(name)
 	# Example: trigger inspection animation
 	# if anim_player:
 	#     anim_player.play("Inspect")

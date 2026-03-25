@@ -558,9 +558,10 @@ func initialize_scoring_system():
 # Create ScoreManager instance
 func create_score_manager():
 	# Load and create ScoreManager
-	var ScoreManagerScript = load("res://scripts/ScoreManager.gd")
+	var ScoreManagerScript = load("res://scripts/infraction_score_manager.gd")
 	score_manager = ScoreManagerScript.new()
 	score_manager.name = "ScoreManager"
+	score_manager.debug_scoring = true
 	score_manager.process_mode = Node.PROCESS_MODE_PAUSABLE
 	
 	# Add to scene tree
@@ -587,8 +588,8 @@ func create_score_display():
 
 # Connect scoring system signals
 func connect_scoring_signals():
-	if score_manager and score_manager.has_signal("level_completed"):
-		score_manager.level_completed.connect(_on_scoring_level_completed)
+	if score_manager and score_manager.has_signal("round_completed"):
+		score_manager.round_completed.connect(_on_scoring_level_completed)
 		debug_print("ScoreManager signals connected", "scoring")
 
 # Configure scoring system based on level configuration
@@ -597,8 +598,8 @@ func configure_scoring_from_level_config():
 		debug_print("No level config for scoring system", "scoring")
 		return
 	
-	if score_manager and score_manager.has_method("initialize_scoring"):
-		score_manager.initialize_scoring(current_level_config)
+	if score_manager and score_manager.has_method("initialize_round"):
+		score_manager.initialize_round()
 		debug_print("Scoring configured from level config", "scoring")
 	else:
 		debug_print("WARNING - ScoreManager not available for configuration", "scoring")
@@ -654,7 +655,7 @@ func _on_timer_expired_with_scoring():
 	
 	# Let scoring system determine if level failed or succeeded
 	if score_manager and score_manager.has_method("check_level_failure"):
-		score_manager.check_level_failure()
+		score_manager.check_time_expired()
 	else:
 		# Fallback to original timer expiration behavior
 		_on_timer_expired()
