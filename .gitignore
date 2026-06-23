@@ -1,6 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
-.import/
 **/[B]build/
 **/[B]builds
 
@@ -15,6 +14,7 @@ mono_crash.*.json
 Thumbs.db
 *.tmp
 *.bak
+*.backup
 *.swp
 *~.nib
 *.log
@@ -44,25 +44,20 @@ android/gradle/
 android/gradlew
 android/gradlew.bat
 
-# Android build outputs (large files) - exclude entire build directory
+# Android build outputs
 android/build/
 
-# Godot export builds (large files)
+# Godot export builds
 builds/
 
 # Temporary files
 **/temp/
 **/tmp/
+*.zip
 
 # OS generated files
 .DS_Store?
 ehthumbs.db
 Icon?
 
-# Documentation files should be tracked for project continuity
-# DEVELOPMENT_NOTES.md - IMPORTANT: This file should be committed
-# README.md, WARP.md, and other .md files should also be tracked
-
-# Local development temporary files (if any specific local notes needed)
-# local_notes.md
-# personal_dev_notes.txt
+# Project documentation is tracked — see PROJECT_ARCHITECTURE.md
