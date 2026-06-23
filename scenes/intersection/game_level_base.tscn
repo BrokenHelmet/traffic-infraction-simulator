@@ -40,6 +40,12 @@ environment = SubResource("Environment_jq7ux")
 
 [node name="GameplayManager" type="Node" parent="." unique_id=2112293303]
 script = ExtResource("3_sbb47")
+debug_spawning = null
+debug_pedestrian_spawning = null
+debug_path_management = null
+debug_level_objectives = null
+debug_vehicle_cleanup = null
+debug_pedestrian_cleanup = null
 
 [node name="Clickable3DManager" type="Node3D" parent="." unique_id=1760675973]
 script = ExtResource("4_pewlk")

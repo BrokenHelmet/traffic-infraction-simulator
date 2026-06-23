@@ -27,7 +27,14 @@ var level_config: Resource
 var spawn_timer: Timer
 
 # This is to the HUD directly during gameplay
-@onready var hud = get_node_or_null("/root/AppRoot/GameHUD")   # This will silently fail
+@onready var hud: CanvasLayer = _find_hud()
+
+func _find_hud() -> CanvasLayer:
+	# Try to find HUD in a more robust way
+	var app_root = get_tree().root.find_child("AppRoot", true, false)
+	if app_root:
+		return app_root.get_node_or_null("GameHUD")
+	return null
 
 # Vehicle management
 var active_vehicles: Array[CharacterBody3D] = []
@@ -64,29 +71,29 @@ signal vehicle_collision
 # DEBUG HELPER FUNCTIONS
 # =============================================================================
 
-func debug_print(message: String, enabled: bool):
+func debug_print(message: String, enabled: bool) -> void:
 	if enabled:
 		print("[GameManager] ", message)
 
-func dbg_spawn(message: String):
+func dbg_spawn(message: String) -> void:
 	debug_print(message, debug_spawning)
 
-func dbg_pedestrian_spawn(message: String):
+func dbg_pedestrian_spawn(message: String) -> void:
 	debug_print(message, debug_pedestrian_spawning)
 
-func dbg_path(message: String):
+func dbg_path(message: String) -> void:
 	debug_print(message, debug_path_management)
 
-func dbg_objective(message: String):
+func dbg_objective(message: String) -> void:
 	debug_print(message, debug_level_objectives)
 
-func dbg_cleanup(message: String):
+func dbg_cleanup(message: String) -> void:
 	debug_print(message, debug_vehicle_cleanup)
 
-func dbg_pedestrian_cleanup(message: String):
+func dbg_pedestrian_cleanup(message: String) -> void:
 	debug_print(message, debug_pedestrian_cleanup)
 
-func _ready():	
+func _ready() -> void:	
 	# Find main controller
 	main_controller = get_parent()
 	
@@ -104,7 +111,7 @@ func _ready():
 	pedestrian_spawn_timer.one_shot = false
 	add_child(pedestrian_spawn_timer)
 
-func initialize_level(config: Resource, level_scene: Node3D):
+func initialize_level(config: Resource, _level_scene: Node3D) -> void:
 	"""Initialize the level with configuration and start vehicle spawning"""
 	level_config = config
 	is_level_active = true
@@ -121,64 +128,24 @@ func initialize_level(config: Resource, level_scene: Node3D):
 		dbg_spawn("Warning - No level config provided")
 		return
 
-func _process(_delta):
-	pass
-
-func _input(event: InputEvent) -> void:
-	# Add a raycast from the camera center point to the scene and work out what is hit
-	
-	var _viewport = get_viewport()
-	var _camera = _viewport.get_camera_3d()
-	#var _raycast = 
-	var _ray_origin = _camera.project_ray_origin(_viewport.get_mouse_position())
-	var _ray_end = _ray_origin + _camera.project_ray_normal(_viewport.get_mouse_position()) * 1000
-	
-	#var space_state = get_world_3d().direct_space_state
-	
-	#if event.is_pressed():
-		#if event is InputEventScreenTouch:
-			#print ("Target incident has been hit via touch screen")
-		#
-		#elif event is InputEventMouseButton:
-			#if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
-				#print ("Target incident has been hit via mouse", event.button_index)
-
-func _on_infraction_confirmed(points: int):
+func _on_infraction_confirmed(points: int) -> void:
 	current_score += points
-	hud.update_score(current_score) # First Mate handles the live updates
+	if hud:
+		hud.update_score(current_score) # First Mate handles the live updates
 
-func _check_level_objectives():
+func _check_level_objectives() -> void:
 	"""Check if level objectives have been met"""
 	if not level_config:
 		return
 	
-	# PRESENTATION MODE: Game over functionality suspended for continuous traffic flow
-	# This allows for uninterrupted demonstration of the traffic control system
-	
-	var current_time = Time.get_unix_time_from_system()
-	var elapsed_time = current_time - level_start_time
-	
-	# SUSPENDED: Check win condition - vehicles will continue spawning indefinitely
-	# if vehicles_passed >= level_config.target_vehicles_passed:
-	#	_complete_level(true)
-	#	return
-	
-	# SUSPENDED: Check fail conditions - no time limit or collision limits
-	# if elapsed_time >= level_config.time_limit:
-	#	print("GameManager: Time limit reached")
-	#	_complete_level(false)
-	#	return
-	
-	# if collisions_count >= level_config.max_collisions_allowed:
-	#	print("GameManager: Too many collisions")
-	#	_complete_level(false)
-	#	return
+	var current_time: float = Time.get_unix_time_from_system()
+	var elapsed_time: float = current_time - level_start_time
 	
 	# Optional: Print status updates for monitoring during presentation
 	if int(elapsed_time) % 30 == 0 and int(elapsed_time) > 0:  # Every 30 seconds
 		dbg_objective("😦 Traffic Status - Vehicles passed: " + str(vehicles_passed) + ", Pedestrians passed: " + str(pedestrians_passed) + ", Active V/P: " + str(active_vehicles.size()) + "/" + str(active_pedestrians.size()) + ", Collisions: " + str(collisions_count))
 
-func _complete_level(success: bool):
+func _complete_level(success: bool) -> void:
 	"""Complete the level with success or failure"""
 	if not is_level_active:
 		return
@@ -189,30 +156,30 @@ func _complete_level(success: bool):
 	if spawn_timer:
 		spawn_timer.stop()
 	
-	var result = "SUCCESS" if success else "FAILED"
+	var result: String = "SUCCESS" if success else "FAILED"
 	dbg_objective("Level " + str(result))
-	dbg_objective("	• Vehicles passed: " + str(vehicles_passed) + "/" + str(level_config.target_vehicles_passed))
-	dbg_objective("	• Collisions: " + str(collisions_count) + "/" + str(level_config.max_collisions_allowed))
 	
 	level_completed.emit(success)
 
 func get_level_status() -> Dictionary:
 	"""Get current level status for UI display"""
-	var current_time = Time.get_unix_time_from_system()
-	var elapsed_time = current_time - level_start_time
-	var remaining_time = level_config.time_limit - elapsed_time if level_config else 0.0
+	var current_time: float = Time.get_unix_time_from_system()
+	var elapsed_time: float = current_time - level_start_time
+	var target_vehicles: int = level_config.get("target_vehicles_passed", 0) if level_config else 0
+	var time_limit: float = level_config.get("time_limit", 0.0) if level_config else 0.0
+	var remaining_time: float = time_limit - elapsed_time if time_limit > 0 else 0.0
 	
 	return {
 		"vehicles_passed": vehicles_passed,
-		"target_vehicles": level_config.target_vehicles_passed if level_config else 0,
+		"target_vehicles": target_vehicles,
 		"collisions": collisions_count,
-		"max_collisions": level_config.max_collisions_allowed if level_config else 0,
+		"max_collisions": level_config.get("max_collisions_allowed", 0) if level_config else 0,
 		"remaining_time": max(0.0, remaining_time),
 		"active_vehicles": active_vehicles.size(),
-		"max_vehicles": level_config.max_vehicles if level_config else 0
+		"max_vehicles": level_config.get("max_vehicles", 0) if level_config else 0
 	}
 
-func stop_level():
+func stop_level() -> void:
 	"""Stop the current level and perform comprehensive cleanup"""
 	dbg_spawn("Stopping level and cleaning up all vehicles...")
 	
@@ -231,28 +198,26 @@ func stop_level():
 		dbg_pedestrian_spawn("Pedestrian spawn timer stopped")
 	
 	# Clean up all active vehicles immediately
-	var vehicle_count = active_vehicles.size()
+	var vehicle_count: int = active_vehicles.size()
 	for vehicle in active_vehicles:
 		if is_instance_valid(vehicle):
 			# Remove PathFollow3D nodes created for this vehicle
-			if vehicle.has_method("get") and "path" in vehicle and vehicle.path:
-				if is_instance_valid(vehicle.path):
-					vehicle.path.queue_free()
+			var v_path: Node = vehicle.get("path")
+			if is_instance_valid(v_path):
+				v_path.queue_free()
 			
-			# Queue the vehicle for deletion
 			vehicle.queue_free()
 			dbg_cleanup("Queued vehicle for deletion: " + vehicle.name)
 	
 	# Clean up all active pedestrians immediately
-	var pedestrian_count = active_pedestrians.size()
+	var pedestrian_count: int = active_pedestrians.size()
 	for pedestrian in active_pedestrians:
 		if is_instance_valid(pedestrian):
 			# Remove PathFollow3D nodes created for this pedestrian
-			if pedestrian.has_method("get") and "path" in pedestrian and pedestrian.path:
-				if is_instance_valid(pedestrian.path):
-					pedestrian.path.queue_free()
+			var p_path: Node = pedestrian.get("path")
+			if is_instance_valid(p_path):
+				p_path.queue_free()
 			
-			# Queue the pedestrian for deletion
 			pedestrian.queue_free()
 			dbg_pedestrian_cleanup("Queued pedestrian for deletion: " + pedestrian.name)
 	
@@ -271,9 +236,8 @@ func stop_level():
 	level_start_time = 0.0
 	
 	dbg_spawn("Level stopped - cleaned up " + str(vehicle_count) + " vehicles and " + str(pedestrian_count) + " pedestrians")
-	dbg_spawn("All tracking arrays cleared")
 
-func cleanup():
+func cleanup() -> void:
 	"""Additional cleanup method for when GameManager is being destroyed"""
 	dbg_spawn("Performing final cleanup...")
 	
@@ -282,13 +246,11 @@ func cleanup():
 		stop_level()
 	
 	# Clean up spawn timers
-	if spawn_timer and is_instance_valid(spawn_timer):
-		spawn_timer.stop()
+	if is_instance_valid(spawn_timer):
 		spawn_timer.queue_free()
 		spawn_timer = null
 	
-	if pedestrian_spawn_timer and is_instance_valid(pedestrian_spawn_timer):
-		pedestrian_spawn_timer.stop()
+	if is_instance_valid(pedestrian_spawn_timer):
 		pedestrian_spawn_timer.queue_free()
 		pedestrian_spawn_timer = null
 	
@@ -312,14 +274,14 @@ func cleanup():
 
 func get_statistics() -> Dictionary:
 	"""Get current game statistics for UI and level completion reporting"""
-	var current_time = Time.get_unix_time_from_system()
-	var elapsed_time = current_time - level_start_time if level_start_time > 0.0 else 0.0
+	var current_time: float = Time.get_unix_time_from_system()
+	var elapsed_time: float = current_time - level_start_time if level_start_time > 0.0 else 0.0
 	
-	var stats = {
+	var stats: Dictionary = {
 		"elapsed_time": elapsed_time,
 		"elapsed_time_formatted": _format_time(elapsed_time),
-		"spawn_rate": level_config.vehicle_spawn_rate if level_config else 0.0,
-		"pedestrian_spawn_rate": level_config.pedestrian_spawn_rate if level_config else 0.0,
+		"spawn_rate": level_config.get("vehicle_spawn_rate", 0.0) if level_config else 0.0,
+		"pedestrian_spawn_rate": level_config.get("pedestrian_spawn_rate", 0.0) if level_config else 0.0,
 		"level_active": is_level_active,
 		"score": 0  # Base score, will be updated by ScoreManager if available
 	}
@@ -327,6 +289,7 @@ func get_statistics() -> Dictionary:
 	dbg_objective("Statistics requested - Vehicles: %d, Pedestrians: %d, Collisions: %d, Active V/P: %d/%d, Time: %s" % [vehicles_passed, pedestrians_passed, collisions_count, active_vehicles.size(), active_pedestrians.size(), stats.elapsed_time_formatted])
 	
 	return stats
+
 
 # Format elapsed time as MM:SS
 func _format_time(time_seconds: float) -> String:
